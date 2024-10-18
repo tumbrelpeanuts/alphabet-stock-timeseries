@@ -1,5 +1,5 @@
 import pandas as pd
-from statsmodels.tsa.stattools import adfuller as adf, kpss
+from statsmodels.tsa.stattools import adfuller as adf
 import matplotlib.pyplot as plt
 from statsmodels.tsa.arima.model import ARIMA
 from statsmodels.tsa.statespace.sarimax import SARIMAX
@@ -27,15 +27,12 @@ def adf_test(df):
     for key, value in adf_result[4].items():
         print(f"   {key}: {value}")
 
-
-# Example usage:
-# Assuming you have a time series DataFrame named 'df'
-# Call the function with your DataFrame
-# adf_kpss_test(df)
-# The code above is computing the ADF test and KPSS test
 # * ADF test: checks for the presence of a unit root in the time series, which indicates non-stationarity. 
 # * KPSS test: checks for stationarity around a deterministic trend, which is the opposite of the ADF test.
-# I got the code from Selva from ML+. He gives the code if you sign up. Here is the link if you are interested: https://www.machinelearningplus.com/about-us/. Here is another one from [stack exchange](https://stats.stackexchange.com/questions/418997/augmented-dickey-fuller-test): https://stats.stackexchange.com/questions/418997/augmented-dickey-fuller-test
+# I got the code from Selva from ML+. He gives the code if you sign up. Here is the link if you are interested: 
+# https://www.machinelearningplus.com/about-us/. 
+# Here is another one from [stack exchange](https://stats.stackexchange.com/questions/418997/augmented-dickey-fuller-test): 
+# https://stats.stackexchange.com/questions/418997/augmented-dickey-fuller-test
 
 
 def plot_rolling_statistics(df, column: str, window: int = 12):
@@ -68,10 +65,6 @@ def plot_rolling_statistics(df, column: str, window: int = 12):
     plt.title('Rolling Mean & Standard Deviation')
     plt.show(block=False)
 
-# Example usage:
-# Assuming adjusted_close_df is your DataFrame and 'Adjusted_Close' is the column name
-# plot_rolling_statistics(adjusted_close_df, 'Adjusted_Close')
-
 
 def optimize_ARIMA(endog: Union[pd.Series, list], order_list: list) -> pd.DataFrame:
     """
@@ -102,7 +95,10 @@ def optimize_ARIMA(endog: Union[pd.Series, list], order_list: list) -> pd.DataFr
     result_df = result_df.sort_values(by='AIC', ascending=True).reset_index(drop=True)
     
     return result_df
-# The code automates selecting the optimal ARIMA model by testing different order combinations and choosing the one with the lowest AIC. It creates a data frame of all possible results. The code was obtained from a book. The following link will link it to the creator's [GitHub](https://github.com/marcopeix/TimeSeriesForecastingInPython/blob/master/CH06/CH06.ipynb). Here is the link: https://github.com/marcopeix/TimeSeriesForecastingInPython/blob/master/CH06/CH06.ipynb
+# The code automates selecting the optimal ARIMA model by testing different order 
+# combinations and choosing the one with the lowest AIC. It creates a data frame of 
+# all possible results. The code was obtained from a book. Here is the link: 
+# https://github.com/marcopeix/TimeSeriesForecastingInPython/blob/master/CH06/CH06.ipynb
 
 
 def optimize_SARIMA(endog: Union[pd.Series, list], order_list: list, d: int, D: int, s: int) -> pd.DataFrame:
@@ -126,11 +122,10 @@ def optimize_SARIMA(endog: Union[pd.Series, list], order_list: list, d: int, D: 
     result_df = pd.DataFrame(results)
     result_df.columns = ['(p,q,P,Q)', 'AIC']
     
-    #Sort in ascending order, lower AIC is better
+    # Sort in ascending order, lower AIC is better
     result_df = result_df.sort_values(by='AIC', ascending=True).reset_index(drop=True)
     
     return result_df
-
 
 
 def plot_sarima_train_predictions(test_df: pd.DataFrame, predictions) -> None:
@@ -268,9 +263,7 @@ def optimize_SARIMAX(endog: Union[pd.Series, list], exog: Union[pd.Series, list]
             continue
             
         aic = model.aic
-        # Calculate Heteroskedasticity P-Value directly from the fitted model
-        #heteroskedasticity_pvalue = model.test_heteroskedasticity('breakvar')[1][1] if model.test_heteroskedasticity('breakvar') is not None else None
-        #heteroskedasticity_pvalue = model.test_heteroskedasticity('breakvar')[0][1]
+        
         results.append([order, aic])
         
     result_df = pd.DataFrame(results, columns=['(p,q,P,Q)', 'AIC'])
