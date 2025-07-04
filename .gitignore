@@ -1,3 +1,70 @@
-.DS_Store
-.ipynb_checkpoints/
+# Conda Environment
+time-series-env/
+.conda/
+*.conda
+
+# Python
 __pycache__/
+
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+# Uncomment the next line if you want to ignore all notebook outputs
+# *.ipynb
+
+
+# Cache
+.cache/
+.pytest_cache/
+
+
+# Virtual Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+
+# IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Credentials & Secrets
+.env
+.env.local
+.env.*.local
+secrets.yml
+config/secrets/
+credentials.json
+*.key
+*.pem
+
+# Documentation builds
+docs/_build/
+site/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Backup files
+*.bak
+*.backup
